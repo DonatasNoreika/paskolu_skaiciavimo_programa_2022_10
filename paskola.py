@@ -4,7 +4,7 @@ import csv
 class Paskola:
     def __init__(self):
         self.suma = 0
-        self.terminas = 1
+        self.terminas = 0
         self.palukanos = 0
         self._bendros_palukanos = 0
         self._bendra_moketina_suma = 0
@@ -38,4 +38,7 @@ class Paskola:
             csv_writer.writerow(["Bendra", self.suma, "", round(bendros_palukanos, 2), round(bendra_moketina_suma, 2)])
             self._bendros_palukanos = bendros_palukanos
             self._bendra_moketina_suma = bendra_moketina_suma
+
+    def __str__(self):
+        return f"Suma: {self.suma}, terminas: {self.terminas}, palūkanos: {self.palukanos}"
 

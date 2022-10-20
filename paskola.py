@@ -2,11 +2,10 @@ import csv
 
 
 class Paskola:
-    def __init__(self, suma, terminas, palukanos):
-        self.suma = suma
-        self.terminas = terminas
-        self.palukanos = palukanos
-        self.grazintina_dalis = self.suma / self.terminas
+    def __init__(self):
+        self.suma = 0
+        self.terminas = 1
+        self.palukanos = 0
         self._bendros_palukanos = 0
         self._bendra_moketina_suma = 0
 
@@ -19,6 +18,7 @@ class Paskola:
         print("Bendra mokėtina suma:", self._bendra_moketina_suma)
 
     def mokejimo_grafikas(self):
+        grazintina_dalis = self.suma / self.terminas
         bendra_suma = self.suma
         bendros_palukanos = 0
         bendra_moketina_suma = 0
@@ -29,13 +29,13 @@ class Paskola:
             for men_nr in range(self.terminas):
                 palukanos = round(bendra_suma * self.palukanos * 0.01 / 12, 2)
                 bendros_palukanos += palukanos
-                bendra_suma -= self.grazintina_dalis
-                moketina_suma = self.grazintina_dalis + palukanos
+                bendra_suma -= grazintina_dalis
+                moketina_suma = grazintina_dalis + palukanos
                 bendra_moketina_suma += moketina_suma
-                print('{:12} {:12} {:12} {:12} {:12}'.format(men_nr + 1, self.grazintina_dalis, bendra_suma, palukanos, moketina_suma))
-                csv_writer.writerow([men_nr + 1, self.grazintina_dalis, bendra_suma, palukanos, moketina_suma])
-            print('{:12} {:12} {:12} {:12} {:12}'.format("Bendra", self.suma, "", bendros_palukanos, bendra_moketina_suma))
-            csv_writer.writerow(["Bendra", self.suma, "", bendros_palukanos, bendra_moketina_suma])
+                print('{:12} {:12} {:12} {:12} {:12}'.format(men_nr + 1, grazintina_dalis, round(bendra_suma, 2), round(palukanos, 2), round(moketina_suma, 2)))
+                csv_writer.writerow([men_nr + 1, grazintina_dalis, round(bendra_suma, 2), round(palukanos, 2), round(moketina_suma, 2)])
+            print('{:12} {:12} {:12} {:12} {:12}'.format("Bendra", self.suma, "", round(bendros_palukanos, 2), round(bendra_moketina_suma, 2)))
+            csv_writer.writerow(["Bendra", self.suma, "", round(bendros_palukanos, 2), round(bendra_moketina_suma, 2)])
             self._bendros_palukanos = bendros_palukanos
             self._bendra_moketina_suma = bendra_moketina_suma
 
